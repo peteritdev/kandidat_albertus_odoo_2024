@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!--
+ Author    => Albertus Restiyanto Pramayudha
+ email     => xabre0010@gmail.com
+ linkedin  => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+ youtube   => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+ -->
+<odoo>
+        <!-- make readonly for everyone -->
+        <record id="view_credit_readonly_partner_form" model="ir.ui.view">
+            <field name="name">res.partner.partner_credit_limit.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+              <xpath expr="//field[@name='vat']" position="before">
+                  <field name="devisi_id" widget="many2many_tags" options="{'no_open': True, 'no_create': True}"/>
+              </xpath>
+                <xpath expr="//group[@name='purchase']" position="after">
+                    <group string="Credit" name="credit">
+                            <field name="check_credit" readonly="1"/>
+                            <field name="credit_limit" readonly="1" attrs="{'invisible':[('check_credit','!=',True)]}"/>
+                            <field name="credit_limit_on_hold" attrs="{'invisible':[('check_credit','!=',True)]}"/>
+                            <field name="credit_used" attrs="{'invisible':[('check_credit','!=',True)]}"/>
+                            <field name="credit_balance" attrs="{'invisible':[('check_credit','!=',True)]}"/>
+                    </group>
+                </xpath>
+                  <xpath expr="//field[@name='property_product_pricelist']" position="attributes">
+                      <attribute name="attrs">{}</attribute>
+                  </xpath>
+                  <xpath expr="//field[@name='property_product_pricelist']" position="attributes">
+                      <attribute name="invisible">1</attribute>
+                  </xpath>
+            </field>
+        </record>
+        <!-- Make not readonly for user_edit_credit_limit  -->
+        <record id="view_credit_editable_partner_form" model="ir.ui.view">
+            <field name="name">res.partner.partner_credit_limit.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="view_credit_readonly_partner_form"/>
+<!--            <field name="groups_id" eval="[(6, 0, [ref('credit_limit_config')])]"/>-->
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='credit_limit']" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </xpath>
+                <xpath expr="//field[@name='check_credit']" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </xpath>
+                <xpath expr="//field[@name='credit_balance']" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </xpath>
+                <xpath expr="//field[@name='credit_used']" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </xpath>
+            </field>
+        </record>
+</odoo>

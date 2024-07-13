@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!--
+ Author    => Albertus Restiyanto Pramayudha
+ email     => xabre0010@gmail.com
+ linkedin  => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+ youtube   => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+ -->
+<odoo>
+    <!-- Branch Tree View -->
+    <record id="res_devisi_tree_view" model="ir.ui.view">
+        <field name="name">res.devisi.tree</field>
+        <field name="model">res.devisi</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="user_id"/>
+                <field name="pricelist_id"/>
+            </tree>
+        </field>
+    </record>
+    <!-- Branch Form View -->
+    <record id="res_devisi_form_view" model="ir.ui.view">
+        <field name="name">res.devisi.form</field>
+        <field name="model">res.devisi</field>
+        <field name="arch" type="xml">
+            <form string="Devisi">
+                <sheet>
+                    <div class="oe_title">
+                         <label for="name" class="oe_edit_only" />
+                        <h1>
+                            <field name="name"  class="oe_edit_only" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="user_id" options="{'no_open': True, 'no_create': True}"/>
+                        </group>
+                        <group>
+                            <field name="pricelist_id" options="{'no_open': True, 'no_create': True}"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_devisi_filter" model="ir.ui.view">
+        <field name="name">devisi.list.select</field>
+        <field name="model">res.devisi</field>
+        <field name="priority" eval="15"/>
+        <field name="arch" type="xml">
+            <search string="Search Sales Order">
+                <field name="name" string="Nama Devisi"
+                    filter_domain="[('name', 'ilike', self)]"/>
+                <field name="pricelist_id"/>
+            </search>
+        </field>
+    </record>
+    <record id="action_res_devisi" model="ir.actions.act_window">
+        <field name="name">Divisi</field>
+        <field name="res_model">res.devisi</field>
+        <field name="view_id" ref="res_devisi_tree_view" />
+        <field name="search_view_id" ref="view_devisi_filter"/>
+        <field name="view_mode">tree,form</field>
+    </record>
+        <menuitem id="customer_devisi_menu"
+            name="Divisi"
+            parent="contacts.res_partner_menu_config"
+            sequence="99"
+            action="action_res_devisi"
+        />
+</odoo>

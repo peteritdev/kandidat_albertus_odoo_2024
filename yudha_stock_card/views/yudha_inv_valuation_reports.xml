@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author   => Albertus Restiyanto Pramayudha
+     email    => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube  => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+<template id="inventory_valuation_report_main">
+    <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4 style="text-align:center;">
+<!--                                <span>Sales person Report From <span  t-esc="datetime.datetime.strptime(data['start_date'], '%Y-%m-%d %H:%M:%S').strftime('%d/%m/%Y')" /> To <span t-esc="datetime.datetime.strptime(data['end_date'], '%Y-%m-%d %H:%M:%S').strftime('%d/%m/%Y')"/></span>-->
+                                <span>Inventory Valuation Report </span>
+                                <br/>
+                            </h4>
+                        </div>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <p>
+                                        <t t-if="docs.date_start"><strong>Date :</strong> <span t-esc="docs.date_start"/><strong> To </strong><span t-esc="docs.date_end"/></t>
+                                    </p>
+                                </div>
+                                <div class="col-xs-6" align="left">
+                                    <p>
+                                        <t t-if="docs.wh_id"><strong>Warehouse :</strong> <span t-esc="docs.wh_id"/><br/></t>
+                                    </p>
+                                </div>
+                            </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-condensed"  style="border:1px solid black;">
+                                <thead>
+                                    <tr>
+                                        <th>Product </th>
+                                        <th style="border:1px solid black;">Costing Methode</th>
+                                        <th style="border:1px solid black;" colspan="2">Begining</th>
+                                        <th style="border:1px solid black;" colspan="2">Received</th>
+                                        <th style="border:1px solid black;" colspan="2">Sales</th>
+                                        <th style="border:1px solid black;" colspan="2">Internal</th>
+                                        <th style="border:1px solid black;" colspan="2">Adjustment</th>
+                                        <th style="border:1px solid black;" colspan="2">Ending</th>
+                                    </tr>
+
+                               </thead>
+                                <t t-set="tot_bal" t-value="0"/>
+                                <t t-set="tot_val" t-value="0"/>
+                                <t t-set="tot_rec" t-value="0"/>
+                                <t t-set="tot_rec_val" t-value="0"/>
+                                <t t-set="tot_sal" t-value="0"/>
+                                <t t-set="tot_sal_val" t-value="0"/>
+                                <t t-set="tot_int" t-value="0"/>
+                                <t t-set="tot_int_val" t-value="0"/>
+                                <t t-set="tot_adj" t-value="0"/>
+                                <t t-set="tot_adj_val" t-value="0"/>
+                                <t t-set="tot_akhir" t-value="0"/>
+                                <t t-set="tot_akhir_val" t-value="0"/>
+                               <tbody>
+                                   <tr t-foreach="lines" t-as="line">
+                                       <td style="border:1px solid black;"> <span t-esc="line['prod_name']"/></td>
+                                       <td style="border:1px solid black;"><span t-esc="line['cost_met']"/></td>
+                                       <td style="border:1px solid black;"><span t-esc="line['beg_bal']"/></td>
+                                       <t t-set="tot_bal" t-value="tot_bal + line['beg_bal']" />
+                                       <td style="border:1px solid black;"><span t-esc="line['val_bal']"/></td>
+                                       <t t-set="tot_val" t-value="tot_bal + line['val_bal']" />
+                                       <td style="border:1px solid black;"><span t-esc="line['rec_bal']"/></td>
+                                       <t t-set="tot_rec" t-value="tot_rec + line['rec_bal']" />
+                                       <td style="border:1px solid black;"><span t-esc="line['rec_val']"/></td>
+                                       <t t-set="tot_rec_val" t-value="tot_rec_val + line['rec_val']" />
+                                       <td style="border:1px solid black;"><span t-esc="line['sal_qty']"/></td>
+                                       <t t-set="tot_sal" t-value="tot_sal + line['sal_qty']" />
+                                       <td style="border:1px solid black;"><span t-esc="line['sal_val']"/></td>
+                                      <t t-set="tot_sal_val" t-value="tot_sal_val + line['sal_val']" />
+                                       <td style="border:1px solid black;"><span t-esc="line['int_qty']"/></td>
+                                       <t t-set="tot_int" t-value="tot_int + line['int_qty']" />
+                                       <td style="border:1px solid black;"><span t-esc="line['int_val']"/></td>
+                                       <t t-set="tot_int_val" t-value="tot_int_val + line['int_val']" />
+                                       <td style="border:1px solid black;"><span t-esc="line['adj_qty']"/></td>
+                                       <t t-set="tot_adj" t-value="tot_adj + line['adj_qty']" />
+                                       <td style="border:1px solid black;"><span t-esc="line['adj_val']"/></td>
+                                       <t t-set="tot_adj_val" t-value="tot_adj_val + line['adj_val']" />
+                                       <td style="border:1px solid black;"><span t-esc="line['akhir_qty']"/></td>
+                                       <t t-set="tot_akhir" t-value="tot_akhir + line['akhir_qty']" />
+                                       <td style="border:1px solid black;"><span t-esc="line['akhir_val']"/></td>
+                                       <t t-set="tot_akhir_val" t-value="tot_akhir_val + line['akhir_val']" />
+                                   </tr>
+                                   <tr>
+                                       <td style="border:1px solid black;" colspan="2">Total</td>
+                                       <td style="border:1px solid black;"><span t-esc="tot_bal"/></td>
+                                       <td style="border:1px solid black;"><span t-esc="tot_val"/></td>
+                                       <td style="border:1px solid black;"><span t-esc="tot_rec"/></td>
+                                       <td style="border:1px solid black;"><span t-esc="tot_rec_val"/></td>
+                                       <td style="border:1px solid black;"><span t-esc="tot_sal"/></td>
+                                       <td style="border:1px solid black;"><span t-esc="tot_sal_val"/></td>
+                                       <td style="border:1px solid black;"><span t-esc="tot_int"/></td>
+                                       <td style="border:1px solid black;"><span t-esc="tot_int_val"/></td>
+                                       <td style="border:1px solid black;"><span t-esc="tot_adj"/></td>
+                                       <td style="border:1px solid black;"><span t-esc="tot_adj_val"/></td>
+                                       <td style="border:1px solid black;"><span t-esc="tot_akhir"/></td>
+                                       <td style="border:1px solid black;"><span t-esc="tot_akhir_val"/></td>
+                                   </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+
+                    <div class="oe_structure"/>
+                         <div class="clearfix">
+                            <div class="row mt32 mb32">
+                              <div class="col-auto col-4 mw-100 mb-4"  name="prepare">
+                                  <p>Prepared By:</p>
+                                  <br/>
+                                  <br/>
+                                  <br/>
+                                  <br/>
+                                  <br>__________________</br>
+                                  <br>Date</br>
+                              </div>
+                              <div class="col-auto col-4 mw-100 mb-4"  name="review">
+                                  <p>Review By:</p>
+                                  <br/>
+                                  <br/>
+                                  <br/>
+                                  <br/>
+                                  <br>__________________</br>
+                                  <br>Date</br>
+                              </div>
+                              <div class="col-auto col-4 mw-100 mb-4"  name="appove_by">
+                                  <p>Approved By:</p>
+                                  <br/>
+                                  <br/>
+                                  <br/>
+                                  <br/>
+                                  <br>__________________</br>
+                                  <br>Date</br>
+                              </div>
+                          </div>
+                    </div>
+                </div>
+                </t>
+            </t>
+        </t>
+</template>
+    <report id="inv_valuation_report_pdf"
+            model="yudha_inventory_valuation.report"
+            string="Inventory Valuation Report"
+            report_type="qweb-pdf"
+            name="yudha_stock_card.inventory_valuation_report_main"
+            file="yudha_stock_card.yudha_inv_valuation_report.xml"
+            menu="False"
+    />
+
+</odoo>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author   => Albertus Restiyanto Pramayudha
+     email    => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube  => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+    <data>
+
+        <!--tree view-->
+        <record id="view_yudha_stock_card_summary_tree" model="ir.ui.view">
+            <field name="name">yudha.stock.card.summary.tree</field>
+            <field name="model">yudha.stock.summary</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Stock Card Summary" >
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                    <field name="user_id"/>
+                    <field name="breakdown_sn"/>
+                    <field name="location_id"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        <!-- form -->
+        <record id="view_yudha_stock_card_summary_form" model="ir.ui.view">
+            <field name="name">yudha.stock.card.summary.form</field>
+            <field name="model">yudha.stock.summary</field>
+            <field name="type">form</field>
+            <field name="priority" eval="7"/>
+            <field name="arch" type="xml">
+                <form string="Stock Card" >
+                    <header>
+                        <button name="action_draft" string="Set To Draft" type="object"/>
+                        <button name="action_confirm" string="Confirm" type="object"/>
+                        <button name="action_done" string="Validate" type="object"/>
+                        <button name="action_calculate" string="Calculated" type="object"/>
+
+                    </header>
+                    <sheet>
+                        <group string="" col="2">
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                            <field name="user_id"/>
+                            <field name="location_id"/>
+                            <field name="breakdown_sn"/>
+                            <field name="state" readonly="1"/>
+                        </group>
+                         <notebook>
+                              <page string="Detail">
+                                  <field name="line_ids" widget="one2many_list">
+                                     <tree string="Detail Stock" create="false" editable="bottom">
+                                        <field name="name"/>
+                                        <field name="stock_move_id" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                        <field name="product_id" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                        <field name="product_uom_id" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                        <field name="lot_id"/>
+                                        <field name="expired_date" />
+                                        <field name="qty_start"/>
+                                        <field name="qty_in"/>
+                                        <field name="qty_out"/>
+                                        <field name="qty_balance"/>
+                                     </tree>
+                                  </field>
+                              </page>
+                         </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+         <!-- Search Filter form -->
+        <record id="yudha_stock_card_summary_filter" model="ir.ui.view">
+            <field name="name">yudha.stock.card.summary.select</field>
+            <field name="model">yudha.stock.summary</field>
+            <field name="arch" type="xml">
+                <search string="Search Summary View Stock Card">
+                    <field name="date_start" string="Date Start"/>
+                    <field name="date_end" string="Date End"/>
+                    <separator/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Date Start" name="date_start" domain="[]" context="{'group_by': 'date_start'}"/>
+                   </group>
+                </search>
+            </field>
+        </record>
+        <!-- Action-->
+        <record id="act_yudha_stock_card_summary_view" model="ir.actions.act_window">
+            <field name="name">Stock Card Summary</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">yudha.stock.summary</field>
+            <field name="domain">[]</field>
+            <field name="view_mode">tree,form</field>
+             <field name="search_view_id" ref="yudha_stock_card_summary_filter"/>
+            <field name="context">{'search_default_group_by_type': True, 'default_company_id': allowed_company_ids[0]}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                   Form Pengiriman Barang ini hanya dapat di akses dari Portal Rekanan
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

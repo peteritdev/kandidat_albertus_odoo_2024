@@ -1,0 +1,62 @@
+<odoo>
+    <data>
+        <record id="view_yudha_valuation_warehouse_product_tree" model="ir.ui.view">
+            <field name="name">sdt.valuation.warehouse.stock.tree</field>
+            <field name="model">valuation.warehouse</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="tgl"/>
+                    <field name="stock_location"/>
+<!--                    <field name="total_item"/>-->
+                </tree>
+            </field>
+        </record>
+
+      <!--Form-->
+      <record id="view_valuation_warehouse_filter_form" model="ir.ui.view">
+            <field name="name">view_valuation_warehouse_form</field>
+            <field name="model">valuation.warehouse</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Product Valuation Warehouse">
+                    <sheet>
+                        <group>
+                            <field name="tgl"/>
+                            <field name="stock_location"/>
+                        </group>
+                        <notebook>
+                            <page string="Product Valuation Warehouse" >
+                                <field name="val_warehouse_ids" widget="one2many_list">
+                                    <tree string="Generate" create="false">
+                                        <field name="tglan" />
+                                        <field name="nama_barang" options="{'no_open': True, 'no_create': True}" string="Unit of Measure" groups="product.group_uom"/>
+                                        <field name="qty"/>
+                                        <field name="uom" options="{'no_open': True, 'no_create': True}" string="Unit of Measure" groups="product.group_uom"/>
+                                        <field name="values" sum="Stock Valuation" widget="monetary"/>
+                                    </tree>
+                                </field>
+                            <group class="oe_subtotal_footer oe_right" colspan="2" name="total_item">
+                                <field name="total_item"/>
+                            </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+         <record id="action_product_valuation_warehouse" model="ir.actions.act_window" >
+              <field name="name">Product Valuation Warehouse</field>
+              <field name="res_model">valuation.warehouse</field>
+              <field name="view_mode">tree,form,pivot</field>
+              <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                  Klik untuk membuat Aktifitas Product Valuation Warehouse Baru
+                </p>
+              </field>
+        </record>
+        <menuitem name="Yudha Product Valuation Warehouse" id="menu_yudha_valuation_warehouse"  sequence="24" action="action_product_valuation_warehouse" parent="stock.menu_warehouse_report" groups="stock.group_stock_manager"/>
+
+    </data>
+</odoo>

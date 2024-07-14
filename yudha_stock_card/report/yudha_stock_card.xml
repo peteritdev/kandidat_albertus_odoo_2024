@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <report id="report_stock_card_menu"
+            model="yudha.stock.card"
+            string="Stock Card Report"
+            report_type="qweb-pdf"
+            name="yudha_stock_card.stock_card_report"
+            file="yudha_stock_card.stock_card_report"
+            menu="True"
+    />
+        <template id="stock_card_report">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <div class="oe_structure"/>
+
+                    <h2>
+                        STOCK CARD
+                        <br/><span t-field="o.product_id"/>
+                    </h2>
+
+                    <table class="table table-condensed">
+                        <tr><td>Date</td><td><span t-field="o.date_start"/> to <span t-field="o.date_end"/></td></tr>
+                        <tr><td>Location</td><td><span t-field="o.location_id.name"/></td></tr>
+                    </table>
+
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th style="width:20%">Date</th>
+                                <th>Picking</th>
+                                <th>Description</th>
+                                <th class="text-right">Date</th>
+                                <th class="text-right">Qty Done</th>
+                                <th class="text-right">Balance</th>
+                                <th class="text-right">Uom</th>
+                                <th class="text-right">Location Id</th>
+                                <th class="text-right">Location Destination</th>
+                            </tr>
+                       </thead>
+
+                       <tbody class="tbody">
+                            <tr t-foreach="o.detail_ids" t-as="l">
+
+                                <td>
+                                   <span t-field="l.date"/>
+                                </td>
+
+                                <td>
+                                   <span t-field="l.picking_id"/>
+                                </td>
+
+                                <td>
+                                   <span t-field="l.name"/>
+                                </td>
+
+                                <td class="text-right">
+                                    <span t-field="l.date" />
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="l.qty_done" />
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="l.qty_balance" />
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="l.product_uom_id" />
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="l.location_id.name" />
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="l.location_dest_id.name" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                    <div class="oe_structure"/>
+                </div>
+                </t>
+            </t>
+        </t>
+        </template>
+
+
+
+
+
+
+    </data>
+</odoo>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author   => Albertus Restiyanto Pramayudha
+     email    => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube  => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+    <data>
+        <menuitem id="menu_yudha_stock_main"
+          parent="stock.menu_warehouse_report"
+          sequence="20"
+          name="Yudha Stock Card"/>
+       <menuitem id="menu_yudha_stock_card_summary"
+          parent="menu_yudha_stock_main"
+          sequence="21"
+          name="Stock Card Summary"
+          action="act_yudha_stock_card_summary_view"
+          />
+        <menuitem id="menu_yudha_stock_card"
+                  parent="menu_yudha_stock_main"
+                  sequence="22"
+                  name="Stock Card Per Product"
+                  action="act_yudha_stock_card_view"
+                  />
+    </data>
+</odoo>

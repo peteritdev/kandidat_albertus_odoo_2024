@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author   => Albertus Restiyanto Pramayudha
+     email    => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube  => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+    <data>
+
+        <!--tree view-->
+        <record id="view_yudha_stock_card_tree" model="ir.ui.view">
+            <field name="name">yudha.stock.card.tree</field>
+            <field name="model">yudha.stock.card</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Stock Card" >
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                    <field name="location_id"/>
+                    <field name="product_id"/>
+                </tree>
+            </field>
+        </record>
+        <!-- form -->
+        <record id="view_yudha_stock_card_form" model="ir.ui.view">
+            <field name="name">yudha.stock.card.form</field>
+            <field name="model">yudha.stock.card</field>
+            <field name="type">form</field>
+            <field name="priority" eval="7"/>
+            <field name="arch" type="xml">
+                <form string="Stock Card" >
+                    <header>
+                       <button name="action_process" string="Process" type="object"/>
+                    </header>
+                    <sheet>
+                        <group string="" col="2">
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                            <field name="location_id"/>
+                            <field name="product_id"/>
+
+                        </group>
+                         <notebook>
+                              <page string="Detail">
+                                  <field name="detail_ids" widget="one2many_list">
+                                     <tree string="Detail Stock" create="false" editable="bottom">
+                                        <field name="detail_id" invisible="1"/>
+                                        <field name="name"/>
+                                        <field name="move_id" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                        <field name="picking_id" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                        <field name="date"/>
+                                        <field name="qty_done"/>
+                                        <field name="qty_balance"/>
+                                        <field name="product_uom_id" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                        <field name="location_id" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                        <field name="location_dest_id" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                     </tree>
+                                  </field>
+                              </page>
+                         </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="act_yudha_stock_card_view">
+            <field name="name">Stock Card</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">yudha.stock.card</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+    </data>
+</odoo>

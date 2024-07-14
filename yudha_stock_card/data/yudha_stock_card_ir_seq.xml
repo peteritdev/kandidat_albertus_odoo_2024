@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author   => Albertus Restiyanto Pramayudha
+     email    => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube  => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+	<data>
+
+		<record id="seq_stock_card" model="ir.sequence">
+			<field name="name">Stock Card</field>
+			<field name="code">yudha.stock.card</field>
+			<field name="prefix">SC/%(year)s/%(month)s/</field>
+			<field name="padding">3</field>
+			<field name="next_number_actual">1</field>
+			<field name="number_increment">1</field>
+			<field name="implementation">standard</field>
+		</record>
+
+		<record id="seq_stock_summary" model="ir.sequence">
+			<field name="name">Stock Summary</field>
+			<field name="code">yudha.stock.summary</field>
+			<field name="prefix">SS/%(year)s/%(month)s/</field>
+			<field name="padding">3</field>
+			<field name="next_number_actual">1</field>
+			<field name="number_increment">1</field>
+			<field name="implementation">standard</field>
+		</record>
+
+	</data>
+</odoo>

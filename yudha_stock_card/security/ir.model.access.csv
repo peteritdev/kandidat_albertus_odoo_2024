@@ -1,0 +1,16 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_yudha_StockCard_users,access.yudha.StockCard.users,model_yudha_stock_card,stock.group_stock_user,1,1,0,0
+access_yudha_StockCard_manager,access.yudha.StockCard.manager,model_yudha_stock_card,stock.group_stock_manager,1,1,1,1
+
+access_yudha_StockCardLine_users,access.yudha.StockCardLine.users,model_yudha_stock_card_line,stock.group_stock_user,1,1,0,0
+access_yudha_StockCardLine_manager,access.yudha.StockCardLine.manager,model_yudha_stock_card_line,stock.group_stock_manager,1,1,1,1
+
+access_yudha_stock_card_summary_users,access.yudha.stock.card.summary.users,model_yudha_stock_summary,stock.group_stock_user,1,1,0,0
+access_yudha_stock_card_summary_manager,access.yudha.stock.card.summary.manager,model_yudha_stock_summary,stock.group_stock_manager,1,1,1,1
+
+access_yudha_stock_card_summary_line_users,access.yudha.stock.card.summary_line.users,model_yudha_stock_summary_line,stock.group_stock_user,1,1,0,0
+access_yudha_stock_card_summary_line_manager,access.yudha.stock.card.summary_line.manager,model_yudha_stock_summary_line,stock.group_stock_manager,1,1,1,1
+
+access_yudha_inv_valuation_main_users,access.yudha.inv.valuation.main.users,model_yudha_inventory_valuation_report,stock.group_stock_user,1,1,0,0
+access_yudha_inv_valuation_main_manager,access.yudha.inv.valuation.main.manager,model_yudha_inventory_valuation_report,stock.group_stock_manager,1,1,1,1
+

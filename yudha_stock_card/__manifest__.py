@@ -1,12 +1,12 @@
 {
 	"name": "Yudha Stock Card",
-	"version": "1.0",
+	"version": "16.0",
 	"depends": [
 		"stock",
 		'stock_account',
 		'purchase_stock',
 		'sale_management',
-		'account_accountant'
+		'account'
 	],
 	"author": "Albertus Restiyanto Pramayudha",
 	"website": "https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/",

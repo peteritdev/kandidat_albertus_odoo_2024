@@ -20,10 +20,11 @@
     'price': 0,
     'currency': 'USD',
     # any module necessary for this one to work correctly
-    'depends': ['base', 'sale_management','stock','contacts'],
+    'depends': ['base', 'sale_management','stock','contacts','delivery'],
     'data': [
         'security/ir.model.access.csv',
         'data/res_devisi_data.xml',
+        'data/delivery_data.xml',
         'views/res_devisi.xml',
         'views/res_partner.xml',
         'views/sale_order.xml',

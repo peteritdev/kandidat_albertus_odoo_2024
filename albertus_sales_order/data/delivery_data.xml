@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!--
+ Author    => Albertus Restiyanto Pramayudha
+ email     => xabre0010@gmail.com
+ linkedin  => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+ youtube   => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+ -->
+<odoo>
+    <data noupdate="1">
+        <record id="delivery_carrier_take_in_plan" model="delivery.carrier">
+            <field name="name">Take In Plan</field>
+            <field name="sequence">2</field>
+            <field name="delivery_type">base_on_rule</field>
+            <field name="product_id" ref="delivery.product_product_delivery_poste"/>
+
+        </record>
+    </data>
+</odoo>

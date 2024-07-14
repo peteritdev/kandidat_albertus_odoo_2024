@@ -30,7 +30,19 @@
                     <attribute name="domain">[('sale_ok', '=', True),('devisi_id','=',devisi_id)]</attribute>
                 </xpath>
                 <xpath expr="//field[@name='partner_shipping_id']" position="replace">
-                    <field name="partner_shipping_id" context="{'default_type':'delivery'}" options='{"always_reload": True}'/>                </xpath>
+                    <field name="partner_shipping_id" context="{'default_type':'delivery'}" options='{"always_reload": True}'/>
+                </xpath>
+                <xpath expr="//button[@name='action_confirm']" position="attributes">
+                    <attribute name="string">Submit</attribute>
+                </xpath>
+                <xpath expr="//field[@name='picking_policy']" position="before">
+                    <field name="pickup_methode"/>
+                    <field name="carrier_id" options="{'no_open': True, 'no_create': True}"/>
+                </xpath>
+                <xpath expr="//div[hasclass('oe_title')]" position="before">
+                    <field name="is_overdue" invisible="1"/>
+                    <widget name="web_ribbon" title="Overdue" bg_color="bg-danger" attrs="{'invisible': [('is_overdue', '=', False)]}"/>
+                </xpath>
             </field>
         </record>
 <!--        <record id="view_order_form_extended" model="ir.ui.view">-->

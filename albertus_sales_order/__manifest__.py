@@ -29,6 +29,7 @@
         'views/res_partner.xml',
         'views/sale_order.xml',
         'views/product_template.xml',
+        'wizards/customer_credit_limit.xml',
 
     ],
     'assets': {

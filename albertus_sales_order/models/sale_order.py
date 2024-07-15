@@ -191,33 +191,32 @@ class SaleOrder(models.Model):
                               'credit_balance': available_credit})
             if self.amount_total > available_credit:
                 imd = self.env['ir.model.data']
-                exceeded_amount = (
-                                              to_invoice_amount + draft_invoice_lines_amount + partner_id.credit + self.amount_total) - partner_id.credit_limit
+                exceeded_amount = (to_invoice_amount + draft_invoice_lines_amount + partner_id.credit + self.amount_total) - partner_id.credit_limit
                 exceeded_amount = "{:.2f}".format(exceeded_amount)
                 exceeded_amount = float(exceeded_amount)
-                vals_wiz = {
-                    'partner_id': partner_id.id,
-                    'sale_orders': str(len(order)) + ' Sale Order Worth : ' + str(to_invoice_amount),
-                    'invoices': str(len(invoice)) + ' Draft Invoice worth : ' + str(draft_invoice_lines_amount),
-                    'current_sale': self.amount_total or 0.0,
-                    'exceeded_amount': exceeded_amount,
-                    'credit': partner_id.credit,
-                    'credit_limit_on_hold': partner_id.credit_limit_on_hold,
-                }
-                # wiz_id = self.env['customer.limit.wizard'].create(vals_wiz)
-                # action = imd.xmlid_to_object('dev_customer_credit_limit.action_customer_limit_wizard')
-                # form_view_id = imd.xmlid_to_res_id('dev_customer_credit_limit.view_customer_limit_wizard_form')
-                # return {
-                #     'name': action.name,
-                #     'help': action.help,
-                #     'type': action.type,
-                #     'views': [(form_view_id, 'form')],
-                #     'view_id': form_view_id,
-                #     'target': action.target,
-                #     'context': action.context,
-                #     'res_model': action.res_model,
-                #     'res_id': wiz_id.id,
-                # }
+                vals_wiz={
+                    'partner_id':partner_id.id,
+                    'sale_orders':str(len(order))+ ' Sale Order Worth : '+ str(to_invoice_amount),
+                    'invoices':str(len(invoice))+' Draft Invoice worth : '+ str(draft_invoice_lines_amount),
+                    'current_sale':self.amount_total or 0.0,
+                    'exceeded_amount':exceeded_amount,
+                    'credit':partner_id.credit,
+                    'credit_limit_on_hold':partner_id.credit_limit_on_hold,
+                    }
+                wiz_id = self.env['customer.limit.wizard'].create(vals_wiz)
+                action = imd.xmlid_to_object('dev_customer_credit_limit.action_customer_limit_wizard')
+                form_view_id = imd.xmlid_to_res_id('dev_customer_credit_limit.view_customer_limit_wizard_form')
+                return {
+                        'name': action.name,
+                        'help': action.help,
+                        'type': action.type,
+                        'views': [(form_view_id, 'form')],
+                        'view_id': form_view_id,
+                        'target': action.target,
+                        'context': action.context,
+                        'res_model': action.res_model,
+                        'res_id':wiz_id.id,
+                    }
             else:
                 self.action_confirm()
         elif partner_id.check_credit and self.payment_term_id.line_ids.days <= 0:

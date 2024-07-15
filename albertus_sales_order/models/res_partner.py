@@ -18,7 +18,9 @@ class ResPartner(models.Model):
     credit_limit = fields.Float('Credit Limit')
     credit_used = fields.Float('Credit Used',readonly=True)
     credit_balance = fields.Float('Credit Balance',compute='_check_balance',store=True,readonly=True)
-    user_id = fields.Many2one('res.users',string='Sales Person')
+    property_product_pricelist = fields.Many2one(tracking=True)
+    property_payment_term_id = fields.Many2one(tracking=True)
+    user_id = fields.Many2one(tracking=True)
 
 
     @api.depends('credit_used','credit_limit')

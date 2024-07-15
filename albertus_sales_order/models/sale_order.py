@@ -204,20 +204,20 @@ class SaleOrder(models.Model):
                     'credit': partner_id.credit,
                     'credit_limit_on_hold': partner_id.credit_limit_on_hold,
                 }
-                wiz_id = self.env['customer.limit.wizard'].create(vals_wiz)
-                action = imd.xmlid_to_object('dev_customer_credit_limit.action_customer_limit_wizard')
-                form_view_id = imd.xmlid_to_res_id('dev_customer_credit_limit.view_customer_limit_wizard_form')
-                return {
-                    'name': action.name,
-                    'help': action.help,
-                    'type': action.type,
-                    'views': [(form_view_id, 'form')],
-                    'view_id': form_view_id,
-                    'target': action.target,
-                    'context': action.context,
-                    'res_model': action.res_model,
-                    'res_id': wiz_id.id,
-                }
+                # wiz_id = self.env['customer.limit.wizard'].create(vals_wiz)
+                # action = imd.xmlid_to_object('dev_customer_credit_limit.action_customer_limit_wizard')
+                # form_view_id = imd.xmlid_to_res_id('dev_customer_credit_limit.view_customer_limit_wizard_form')
+                # return {
+                #     'name': action.name,
+                #     'help': action.help,
+                #     'type': action.type,
+                #     'views': [(form_view_id, 'form')],
+                #     'view_id': form_view_id,
+                #     'target': action.target,
+                #     'context': action.context,
+                #     'res_model': action.res_model,
+                #     'res_id': wiz_id.id,
+                # }
             else:
                 self.action_confirm()
         elif partner_id.check_credit and self.payment_term_id.line_ids.days <= 0:

@@ -1,0 +1,11 @@
+
+Server dengan 4 CPU, 8 Thread
+60 pengguna secara bersamaan
+60 pengguna / 6 = 10 <- jumlah teoritis pekerja yang dibutuhkan
+(4 * 2) + 1 = 9 <- jumlah pekerja maksimal teoritis
+Kami akan menggunakan 8 pekerja + 1 untuk cron. Kami juga akan menggunakan sistem pemantauan untuk mengukur beban CPU, dan memeriksa apakah antara 7 dan 7.5.
+RAM = 9 * ((0,8*150) + (0,2*1024)) ~= 3Go RAM untuk Odoo
+
+
+memisahkan antara applikasi dan database adalah penting dan perlu karena apabila space hardisk server habis odoo akan tidak bisa jalan dan
+bisa menimbulkan error

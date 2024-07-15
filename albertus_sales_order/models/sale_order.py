@@ -120,7 +120,7 @@ class SaleOrder(models.Model):
         if partner_id.check_credit and sum([x.days for x in self.payment_term_id.line_ids]) > 0:
             domain = [
                 ('order_id.partner_id', 'in', partner_ids),
-                ('order_id.state', 'in', ['sale', 'credit_limit', 'done'])]
+                ('order_id.state', 'in', ['sale','done'])]
             order_lines = self.env['sale.order.line'].search(domain)
 
             order = []

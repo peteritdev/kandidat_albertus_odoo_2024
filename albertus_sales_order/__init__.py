@@ -7,4 +7,4 @@
 #################################################################################
 
 from . import models
-from . import wiards
+from . import wizards
